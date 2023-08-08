@@ -7,10 +7,35 @@ import imgAlfinete from "../../assets/img/alfinete.png"
 import imgDev from "../../assets/img/dev.png"
 import logoFace from "../../assets/img/facebook.svg"
 import logoIG from "../../assets/img/instagram.svg"
-import logoLinkedin from "../assets/img/linkedin.svg"
+import logoLinkedin from "../../assets/img/linkedin.svg"
 
 function Home(){
-// Paranaue de typescript
+// Paranaue de typescript/JavaScript
+
+function mostrarMenu() {
+    
+    let menu = document.getElementById("menu_links") as HTMLCanvasElement; // Obtém o elemento do menu pelo ID
+    let sombra: any = document.getElementById("sombra"); // Obtém o elemento da sombra pelo ID
+    let menu_barras: any = document.getElementById("menu_barras"); // Obtém o elemento do botão do menu pelo ID
+
+    let body = document.getElementsByTagName("body")[0]; // Obtém o elemento body (primeiro elemento)
+
+    if (window.getComputedStyle(menu).left != "10px") { // Verifica se a propriedade 'left' do estilo computado do elemento do menu é diferente de 10px
+        menu.style.left = "10px"; // Define a posição 'left' do menu como 10px movendo ele para direita
+        sombra.style.right = "-10vw"; // Move a sombra para a direita
+        menu_barras.setAttribute("aria-expanded", "true"); // Atualiza o atributo 'aria-expanded' para 'true'
+        menu_barras.setAttribute("aria-label", "fechar menu"); // Atualiza o atributo 'aria-label' para 'fechar menu'
+        body.style.overflow = "hidden"; // Define o overflow do body como "hidden" para evitar a rolagem da página
+    } else {
+        menu.style.left = "-300px"; // Esconde o menu deslocando-o para esquerda
+        sombra.style.right = "110vw"; // Move a sombra para a esquerda para ocultá-la
+        menu_barras.setAttribute("aria-expanded", "false"); // Atualiza o atributo 'aria-expanded' para 'false'
+        menu_barras.setAttribute("aria-label", "abrir menu"); // Atualiza o atributo 'aria-label' para 'abrir menu'
+        body.style.overflow = "auto"; // Restaura o overflow do body para o valor padrão (auto)
+    }
+    menu_barras.classList.toggle("ativo"); // Alterna a classe 'ativo' no botão do menu
+
+}
 
     return (
         // Paranaue de HTML
@@ -25,7 +50,7 @@ function Home(){
             aria-control = especifica qual elemento esta sendo controlado atraves do Id.
             aria-haspopup = indica que o elemento tem um popup (true ou false).
             --> */}
-            <a className="menu_barras" id="menu_barras" aria-label="abrir menu" aria-expanded="false" aria-controls="menu_links" aria-haspopup="true" /* onclick="mostrarMenu() " */  href="#"><div className="barras"></div></a>
+            <a className="menu_barras" id="menu_barras" aria-label="abrir menu" aria-expanded="false" aria-controls="menu_links" aria-haspopup="true" onClick={mostrarMenu} href="#"><div className="barras"></div></a>
             <img className="header_logo" src={Logo} alt=""/>
             <nav>
                 <div id="menu_links" className="menu_links">
